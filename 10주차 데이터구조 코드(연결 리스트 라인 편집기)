@@ -141,4 +141,46 @@ void delete_by_word(char* word) {
             return; 
         }
 
+    prev = p;     ⭐//현재 노드를 이전 노드로 저장
+    p = p->link;  ⭐//다음 노드로 이동
+    }
+
+    printf("해당 단어를 찾을 수 없어 삭제하지 못했습니다.\n");
+}
+
+//위치 번호로 단어 변경
+void replace(int pos, Element val){
+    Node* node;
+
+    if(pos < 0 || pos >= size()){
+        printf("변경 위치 오류입니다.\n");
+        return;
+    }
+
+    node = get_entry(pos);
+
+    if(node != NULL)
+        node -> date = val;
+}
+
+//전체 단어장 출력
+void display(FILE* fp){
+    Node* p = head;
+    int i = 0;
+
+    fprintf(fp, "\n==== 영어 단어장 ====\n");
+
+    while (p != NULL){
+        fprintf(fp, "%3d. 영어 단어: %s/ 한글 뜻 : %s\n",i,p->date.eng,p->date.kor);
+        p = p->link;
+
+        i++;
+    }
+
+    if(i==0)
+        fprintf(fp,"저장된 단어가 없습니다.\n");
+}
+
+//원하는 영어 단어 찾기
+
         

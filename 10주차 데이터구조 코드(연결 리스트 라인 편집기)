@@ -1,0 +1,106 @@
+#define _CRT_SECURE_NO_WARNINGS 
+#include <stdio.h> 
+#include <stdlib.h> 
+#include <string.h> 
+#define MAX_WORD 100 
+#define MAX_MEANING 200 
+// 영어 단어와 한글 뜻을 저장하는 구조체 
+typedef struct Word { 
+    char eng[MAX_WORD];        
+    char kor[MAX_MEANING];     
+} Word; 
+typedef Word Element; 
+// 연결 리스트의 노드 구조체 
+typedef struct LinkedNode { 
+    Element data;              
+    struct LinkedNode* link;   
+} Node; 
+Node* head = NULL;             
+
+// 리스트의 첫 번째 노드를 가리키는 포인터 
+void init_list(void) { 
+    head = NULL; 
+} 
+// 리스트가 비어 있는지 확인 
+int is_empty(void) { 
+    return head == NULL; 
+} 
+// 원하는 위치의 노드를 반환하는 함수 
+Node* get_entry(int pos) { 
+    Node* p = head; 
+    int i; 
+    if (pos < 0) 
+        return NULL; 
+    for (i = 0; i < pos; i++) { 
+        if (p == NULL) 
+            return NULL; 
+            p = p->link; 
+    } 
+    return p; 
+} 
+// 리스트에 저장된 단어 개수 반환 
+int size(void) { 
+    Node* p = head; 
+    int count = 0; 
+    while (p != NULL) { 
+          count++; 
+          p = p->link; 
+    } 
+    return count; 
+} 
+// 특정 노드 뒤에 새 노드를 삽입 
+void insert_next(Node* before, Node* node) { 
+    if (before == NULL || node == NULL) 
+    return; 
+    node->link = before->link; 
+    before->link = node; 
+} 
+// 원하는 위치에 단어 삽입 
+void insert(int pos, Element val) { 
+    Node* new_node; 
+    Node* prev; 
+        if (pos < 0 || pos > size()) { 
+            printf("삽입 위치 오류입니다.\n"); 
+            return; 
+        } 
+    new_node = (Node*)malloc(sizeof(Node)); 
+    if (new_node == NULL) { 
+            printf("메모리 할당 오류입니다.\n"); 
+            return; 
+    } 
+    new_node->data = val; 
+    new_node->link = NULL; 
+    // 맨 앞에 삽입하는 경우 
+    if (pos == 0) { 
+        new_node->link = head; 
+        head = new_node; 
+    } 
+    // 중간 또는 마지막에 삽입하는 경우 
+    else { 
+        prev = get_entry(pos - 1); 
+        insert_next(prev, new_node); 
+    } 
+} 
+// 특정 노드 다음 노드를 제거 
+Node* remove_next(Node* prev) { 
+    Node* removed; 
+    if (prev == NULL || prev->link == NULL) 
+        return NULL; 
+        removed = prev->link; 
+        prev->link = removed->link; 
+    return removed; 
+} 
+// 위치 번호로 단어 삭제 
+void delete_word(int pos) { 
+    Node* prev; 
+    Node* removed; 
+    if (is_empty()) { 
+          printf("단어장이 비어 있습니다.\n"); 
+        return; 
+    } 
+    if (pos < 0 || pos >= size()) { 
+        printf("삭제 위치 오류입니다.\n"); 
+        return; 
+    }
+
+    //첫 번째 노드 삭제

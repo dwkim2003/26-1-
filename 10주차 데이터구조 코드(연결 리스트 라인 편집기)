@@ -104,3 +104,41 @@ void delete_word(int pos) {
     }
 
     //첫 번째 노드 삭제
+    if (pos == 0) { 
+        removed = head; 
+        head = head->link; 
+        free(removed); 
+    } 
+    // 중간 또는 마지막 노드 삭제 
+    else { 
+        prev = get_entry(pos - 1); 
+        removed = remove_next(prev); 
+        if (removed != NULL) 
+        free(removed); 
+    } 
+} 
+⭐//추가 기능: 원하는 영어 단어를 찾아 삭제하는 함수 
+(원하는 위치가 아닌 원하는 영어 단어를 입력해서 그 단어를 찾아서 삭제한다) 
+void delete_by_word(char* word) { 
+    Node* p = head;        // 현재 노드 
+    Node* prev = NULL;     // 이전 노드 
+ 
+    while (p != NULL) { 
+        // 입력한 영어 단어와 현재 노드의 영어 단어가 같으면 삭제 
+        if (strcmp(p->data.eng, word) == 0) { 
+ 
+            ⭐// 삭제할 노드가 첫 번째 노드인 경우 
+            if (prev == NULL) { 
+                head = p->link; 
+            } 
+            ⭐// 삭제할 노드가 중간 또는 마지막 노드인 경우 
+            else { 
+                prev->link = p->link; 
+            } 
+ 
+            printf("삭제된 단어: %s / %s\n", p->data.eng, p->data.kor); 
+            free(p);       ⭐// 삭제한 노드 메모리 해제 
+            return; 
+        }
+
+        

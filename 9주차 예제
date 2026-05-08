@@ -176,3 +176,74 @@ namespace Output
         }
     }
 }*/                                                                            //9주차 6-5 예제
+
+/*using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Output
+{
+    class Fibonacci
+    {
+        public long Get(long n)
+        {
+            if (n == 0)
+                return 0;
+
+            if (n == 1)
+                return 1;
+
+            return Get(n - 1) + Get(n - 2);
+        }
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Fibonacci fibo = new Fibonacci();
+
+            Console.WriteLine(fibo.Get(1));
+            Console.WriteLine(fibo.Get(2));
+            Console.WriteLine(fibo.Get(3));
+            Console.WriteLine(fibo.Get(4));
+            Console.WriteLine(fibo.Get(5));
+        }
+    }
+}*/                                                                      //9주차 연습문제 1(피보나치 수열 코드)
+
+/*using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Output
+{
+    class Program
+    {
+        static int Test(int A)
+        {
+            return 10;
+        }
+        static int Test(long A)
+        {
+            return 20;
+        }
+        static int Test(float A)
+        {
+            return 30;
+        }
+        static int Test(double A)
+        {
+            return 40;
+        }
+        static void Main(string[]args)
+        {
+            Console.WriteLine(Test(52273));
+            Console.WriteLine(Test(52.273));
+        }
+    }
+}*/                                                                          //9주차 연습문제 2

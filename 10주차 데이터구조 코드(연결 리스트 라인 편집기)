@@ -303,7 +303,14 @@ int main(void) {
         case 's';
             fp = fopen("WordBook.txt", "w");
 
-            
+            if (fp == NULL) {
+                printf("WordBook.txt 파일을 저장할 수 없습니다.\n");
+            }
+            else {
+                p = head;
+
+                while (p != NULL) {
+                    fprintf(fp, %s %s\n", p
     
 
         

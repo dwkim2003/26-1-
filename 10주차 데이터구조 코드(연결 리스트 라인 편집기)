@@ -214,6 +214,96 @@ void clear_list(void) {
     }
 }
 
+int main(void) {
+    char command;
+    int pos;
+    Word word;
+    char search_word[MAX_WORD];
+    FILE* fp;
+    Node* p;
 
+    init_list();
+
+    do {
+        printf("\n[메뉴선책]\n");
+        printf("i - 단어 입력, d - 위치 번호로 단어 삭제, x - 원하는 단어 삭제, r - 단어변경, p - 전체 출력, f - 원하는 단어 찾기, c - 단어 개수 출력, l - 파일 읽기, s - 파일 저장, q - 종료, 선택 => ");
+        
+        scanf("%c", &command);
+
+        switch (command) {
+        case 'i';
+            printf("입력할 위치 번호: ");
+            scanf("%d", &pos);
+
+            printf("영어 단어 입력: ");
+            scanf("%s", word.eng);
+
+            printf("한글 뜻 입력: ");
+            scanf("%s", word.kor);
+
+            insert(pos, word);
+            break;
+        case 'd';
+            printf("삭제할 위치 번호: ");
+            scanf("%d", &pos);
+
+            delete_word(pos);
+            break;
+
+        case 'x';
+            printf("삭제할 영어 단어 입력: ");
+            scanf("%s", search_word);
+
+            delete_by_word(search_word);
+            break;
+
+        case 'r';
+            printf("변경할 위치 번호: ");
+            scanf("%d", &pos);
+
+            printf("새 영어 단어 입력: ");
+            scanf("%s", word.eng);
+
+            printf("새 한글 뜻 입력: ");
+            scanf("%s", word.kor);
+
+            replace(pos, word);
+            break;
+
+        case 'p';
+            display(stdout);
+            break;
+
+        case 'f';
+            printf("찾을 영어 단어 입력: ");
+            scanf("%s", search_word);
+
+            find_word(search_word);
+            break;
+
+        case 'c';
+            print_count();
+            break;
+
+        case 'l';
+            fp = fopen("WordBook.txt", "r");
+
+            if (fp == NULL) {
+                printf("WordBook.txt 파일을 열 수 없습니다.\n");
+            }
+            else {
+                while (fscanf(fp, "%s %s", word.eng, word_kor) == 2) {
+                    insert(size(), word);
+                }
+
+                fclose(fp);
+                printf("파일 읽기 완료\n");
+            }
+            break;
+        case 's';
+            fp = fopen("WordBook.txt", "w");
+
+            
+    
 
         
